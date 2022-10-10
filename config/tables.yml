@@ -1,0 +1,3 @@
+parameters:
+    ganstaz.web.tables.legend: '%core.table_prefix%gzo_legend'
+    ganstaz.web.tables.achievements: '%core.table_prefix%gzo_achievements'
