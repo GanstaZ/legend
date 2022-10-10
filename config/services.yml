@@ -1,0 +1,34 @@
+imports:
+    - { resource: achievements.yml }
+    - { resource: tables.yml }
+
+services:
+    ganstaz.legend.achievements.controller:
+        class: ganstaz\legend\controller\achievements
+        arguments:
+            - '@config'
+            - '@dbal.conn'
+            - '@controller.helper'
+            - '@language'
+            - '@template'
+            - '%ganstaz.web.tables.legend%'
+            - '%ganstaz.web.tables.achievements%'
+
+    ganstaz.web.tab.legend:
+        class: ganstaz\legend\core\tabs\type\achievements
+        shared: false
+        parent: ganstaz.web.tab.base
+        arguments:
+            - '@config'
+            - '@?ganstaz.legend.manager'
+        calls:
+            - [set_name, [achievements]]
+        tags:
+            - { name: gzo.web.tab, order: 2 }
+
+    ganstaz.legend.listener:
+        class: ganstaz\legend\event\listener
+        arguments:
+            - '@language'
+        tags:
+            - { name: event.listener }
