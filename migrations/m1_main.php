@@ -17,7 +17,7 @@ class m1_main extends \phpbb\db\migration\migration
 	*/
 	public function effectively_installed()
 	{
-		return $this->check('legend') && $this->check('achievements');
+		return $this->check('achievements') && $this->check('achievement_types') && $this->check('achievements_user');
 	}
 
 	/**
@@ -49,16 +49,16 @@ class m1_main extends \phpbb\db\migration\migration
 	{
 		return [
 			'add_tables' => [
-				$this->table_prefix . 'gzo_legend' => [
+				$this->table_prefix . 'gzo_achievements' => [
 					'COLUMNS' => [
-						'id'	      => ['UINT', null, 'auto_increment'],
-						'category'    => ['VCHAR', ''],
+						'id'		  => ['UINT', null, 'auto_increment'],
+						'category'	  => ['VCHAR', ''],
 						'active'	  => ['BOOL', 0],
-						'special'     => ['BOOL', 0],
+						'special'	  => ['BOOL', 0],
 					],
 					'PRIMARY_KEY' => ['id'],
 				],
-				$this->table_prefix . 'gzo_achievements' => [
+				$this->table_prefix . 'gzo_achievement_types' => [
 					'COLUMNS' => [
 						'aid'		  => ['UINT', null, 'auto_increment'],
 						'cat_id'	  => ['UINT', 0],
@@ -69,6 +69,12 @@ class m1_main extends \phpbb\db\migration\migration
 						'points'	  => ['UINT', 0],
 					],
 					'PRIMARY_KEY' => ['aid'],
+				],
+				$this->table_prefix . 'gzo_achievements_user' => [
+					'COLUMNS' => [
+						'aid'		  => ['UINT', 0],
+						'user_id'	  => ['UINT', 0],
+					],
 				],
 			],
 		];
@@ -84,8 +90,9 @@ class m1_main extends \phpbb\db\migration\migration
 	{
 		return [
 			'drop_tables' => [
-				$this->table_prefix . 'gzo_legend',
 				$this->table_prefix . 'gzo_achievements',
+				$this->table_prefix . 'gzo_achievement_types',
+				$this->table_prefix . 'gzo_achievements_user',
 			],
 		];
 	}

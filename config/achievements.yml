@@ -14,12 +14,11 @@ services:
     ganstaz.legend.achievements.base:
         abstract: true
         arguments:
-            - '@auth'
+            - '@cache'
             - '@dbal.conn'
-            - '@dispatcher'
-            - '@controller.helper'
-            - '@language'
-            - '@template'
+            - '%ganstaz.web.tables.legend%'
+            - '%ganstaz.web.tables.achievements%'
+            - '%ganstaz.web.tables.achievements_user%'
 
 # Achievement types
     ganstaz.legend.posts:
