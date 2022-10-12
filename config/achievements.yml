@@ -16,6 +16,7 @@ services:
         arguments:
             - '@cache'
             - '@dbal.conn'
+            - '@ganstaz.legend.helper'
             - '%ganstaz.web.tables.legend%'
             - '%ganstaz.web.tables.achievements%'
             - '%ganstaz.web.tables.achievements_user%'

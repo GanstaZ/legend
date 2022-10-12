@@ -3,6 +3,32 @@ imports:
     - { resource: tables.yml }
 
 services:
+    ganstaz.legend.helper:
+        class: ganstaz\legend\core\helper
+        arguments:
+            - '@dbal.conn'
+            - '%core.table_prefix%'
+
+    ganstaz.web.tab.legend:
+        class: ganstaz\legend\core\tabs\type\achievements
+        shared: false
+        parent: ganstaz.web.tab.base
+        arguments:
+            - '@config'
+            - '@ganstaz.legend.helper'
+        calls:
+            - [set_name, [achievements]]
+        tags:
+            - { name: gzo.web.tab }
+
+    ganstaz.legend.listener:
+        class: ganstaz\legend\event\listener
+        arguments:
+            - '@language'
+            - '@ganstaz.legend.helper'
+        tags:
+            - { name: event.listener }
+
     ganstaz.legend.achievements.controller:
         class: ganstaz\legend\controller\achievements
         arguments:
@@ -13,22 +39,3 @@ services:
             - '@template'
             - '%ganstaz.web.tables.legend%'
             - '%ganstaz.web.tables.achievements%'
-
-    ganstaz.web.tab.legend:
-        class: ganstaz\legend\core\tabs\type\achievements
-        shared: false
-        parent: ganstaz.web.tab.base
-        arguments:
-            - '@config'
-            - '@?ganstaz.legend.manager'
-        calls:
-            - [set_name, [achievements]]
-        tags:
-            - { name: gzo.web.tab }
-
-    ganstaz.legend.listener:
-        class: ganstaz\legend\event\listener
-        arguments:
-            - '@language'
-        tags:
-            - { name: event.listener }
