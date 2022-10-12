@@ -31,6 +31,7 @@ class m2_achievements extends \phpbb\db\migration\migration
 		return [
 			['custom', [[$this, 'add_categories']]],
 			['custom', [[$this, 'add_achievements']]],
+			['custom', [[$this, 'update_users']]],
 		];
 	}
 
@@ -179,6 +180,39 @@ class m2_achievements extends \phpbb\db\migration\migration
 			}
 
 			$insert_buffer->flush();
+		}
+	}
+
+	/**
+	* Custom function to update users
+	*/
+	public function update_users()
+	{
+		$sql = 'SELECT topic_poster
+				FROM  ' . $this->table_prefix . 'topics
+				WHERE topic_visibility = ' . ITEM_APPROVED . '
+					AND topic_poster <> ' . ANONYMOUS;
+		$result = $this->db->sql_query($sql);
+
+		$topic_posters = [];
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			$poster_id = (int) $row['topic_poster'];
+			if (!isset($topic_posters[$poster_id]))
+			{
+				$topic_posters[$poster_id] = 0;
+			}
+			$topic_posters[$poster_id]++;
+		}
+		$this->db->sql_freeresult($result);
+
+
+		foreach ($topic_posters as $poster => $count)
+		{
+			$this->db->sql_query('UPDATE ' . $this->table_prefix . 'users
+				SET topic_count = ' . (int) $count . '
+				WHERE user_id = ' . (int) $poster
+			);
 		}
 	}
 }

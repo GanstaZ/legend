@@ -77,6 +77,11 @@ class m1_main extends \phpbb\db\migration\migration
 					],
 				],
 			],
+			'add_columns' => [
+				$this->table_prefix . 'users' => [
+					'topic_count'	  => ['UINT', 0],
+				],
+			],
 		];
 	}
 
@@ -93,6 +98,11 @@ class m1_main extends \phpbb\db\migration\migration
 				$this->table_prefix . 'gzo_achievements',
 				$this->table_prefix . 'gzo_achievement_types',
 				$this->table_prefix . 'gzo_achievements_user',
+			],
+			'drop_columns'	=> [
+				$this->table_prefix . 'users' => [
+					'topic_count',
+				],
 			],
 		];
 	}
