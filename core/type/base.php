@@ -151,7 +151,6 @@ class base implements achievements_interface
 		}
 		$this->db->sql_freeresult($result);
 
-
 		return $achievements[$category] ?? $achievements;
 	}
 
