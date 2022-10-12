@@ -206,7 +206,6 @@ class m2_achievements extends \phpbb\db\migration\migration
 		}
 		$this->db->sql_freeresult($result);
 
-
 		foreach ($topic_posters as $poster => $count)
 		{
 			$this->db->sql_query('UPDATE ' . $this->table_prefix . 'users
