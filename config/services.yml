@@ -19,7 +19,7 @@ services:
         calls:
             - [set_name, [achievements]]
         tags:
-            - { name: gzo.web.tab }
+            - { name: gzo.web.tab, order: 2 }
 
     ganstaz.legend.listener:
         class: ganstaz\legend\event\listener
