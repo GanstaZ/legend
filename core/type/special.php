@@ -13,6 +13,27 @@ namespace ganstaz\legend\core\type;
 /**
 * GZO Web: Achievement type special
 */
-class special extends base
+class special implements achievements_interface
 {
+	/**
+	* {@inheritdoc}
+	*/
+	public function get_legend_data(): array
+	{
+		return [
+			[
+				'user'   => 'user_id',
+				'points' => 'mixed',
+				'type'   => 'special',
+			]
+		];
+	}
+
+	/**
+	* {@inheritdoc}
+	*/
+	public function set($data)
+	{
+		return [];
+	}
 }
