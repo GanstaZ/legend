@@ -11,6 +11,7 @@
 namespace ganstaz\legend\core;
 
 use phpbb\db\driver\driver_interface;
+use phpbb\template\template;
 
 /**
 * GZO Web: Legend helper class
@@ -20,26 +21,24 @@ class helper
 	/** @var driver_interface */
 	protected $db;
 
-	/** @var achievements table */
-	protected $legend;
+	/** @var template */
+	protected $template;
 
-	/** @var achievement types table */
-	protected $achievements;
-
-	/** @var achievements user table */
-	protected $a_user;
-
+	/** @var table prefix */
 	protected $table;
 
 	/**
 	* Constructor
 	*
-	* @param driver_interface $db Database object
+	* @param driver_interface $db		Database object
+	* @param template		  $template Template object
+	* @param string			  $table	Table prefix
 	*/
-	public function __construct(driver_interface $db, $table)
+	public function __construct(driver_interface $db, template $template, $table)
 	{
-		$this->db	 = $db;
-		$this->table = $table;
+		$this->db		= $db;
+		$this->template = $template;
+		$this->table	= $table;
 	}
 
 	/**
@@ -58,18 +57,20 @@ class helper
 	/**
 	* Get user achievements
 	*
-	* @param string	 $category
+	* @param ?string $category
 	* @param integer $user_id
 	* @return array
 	*/
-	public function get_user_achievements(string $category = null, int $user_id): array
+	public function get_user_achievements(?string $category, int $user_id): array
 	{
+		$gzo_achievement_types = 'gzo_achievement_types';
+
 		$sql = 'SELECT l.category, a.aid
-				FROM ' . $this->table . 'gzo_achievements l, ' . $this->table . 'gzo_achievement_types a
+				FROM ' . $this->table . 'gzo_achievements l, ' . $this->table . $gzo_achievement_types . ' a
 				WHERE l.id = a.cat_id
 					AND active = 1
 				ORDER BY l.id';
-		$result = $this->db->sql_query($sql);
+		$result = $this->db->sql_query($sql, 86400);
 
 		$categories = [];
 		while ($row = $this->db->sql_fetchrow($result))
@@ -79,11 +80,11 @@ class helper
 		$this->db->sql_freeresult($result);
 
 		$sql = 'SELECT a.aid, a.achievement
-				FROM ' . $this->table . 'gzo_achievement_types a, ' . $this->table . 'gzo_achievements_user au
+				FROM ' . $this->table . $gzo_achievement_types . ' a, ' . $this->table . 'gzo_achievements_user au
 				WHERE a.aid = au.aid
 					AND au.user_id = ' . $user_id . '
 				ORDER BY a.aid';
-		$result = $this->db->sql_query($sql);
+		$result = $this->db->sql_query($sql, 300);
 
 		$achievements = [];
 		while ($row = $this->db->sql_fetchrow($result))
@@ -95,5 +96,31 @@ class helper
 		unset($categories);
 
 		return $achievements[$category] ?? $achievements;
+	}
+
+	/**
+	* Set template data
+	*
+	* @param  array $template_data
+	* @return void
+	*/
+	public function set_template_data(array $template_data): void
+	{
+		foreach ($template_data as $category => $data)
+		{
+			// Set categories
+			$this->template->assign_block_vars('achievements', [
+				'category' => $category,
+				'count'    => count($data),
+			]);
+
+			// Add data to given category
+			foreach ($data as $item)
+			{
+				$this->template->assign_block_vars('achievements.item', [
+					'name' => $item
+				]);
+			}
+		}
 	}
 }
