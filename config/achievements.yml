@@ -1,0 +1,34 @@
+services:
+    ganstaz.legend.collection:
+        class: phpbb\di\service_collection
+        arguments:
+            - '@service_container'
+        tags:
+            - { name: service_collection, tag: gzo.web.legend }
+
+    ganstaz.legend.manager:
+        class: ganstaz\legend\core\manager
+        arguments:
+            - '@cache'
+            - '@dbal.conn'
+            - '@ganstaz.legend.helper'
+            - '@ganstaz.legend.collection'
+            - '%core.table_prefix%'
+
+    ganstaz.legend.achievements.base:
+        abstract: true
+
+# Achievement types
+    ganstaz.legend.common:
+        class: ganstaz\legend\core\type\common
+        shared: false
+        parent: ganstaz.legend.achievements.base
+        tags:
+            - { name: gzo.web.legend }
+
+    # ganstaz.legend.special:
+    #     class: ganstaz\legend\core\type\special
+    #     shared: false
+    #     parent: ganstaz.legend.achievements.base
+    #     tags:
+    #         - { name: gzo.web.legend }
