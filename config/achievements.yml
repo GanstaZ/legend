@@ -9,51 +9,26 @@ services:
     ganstaz.legend.manager:
         class: ganstaz\legend\core\manager
         arguments:
-            - '@ganstaz.legend.collection'
-
-    ganstaz.legend.achievements.base:
-        abstract: true
-        arguments:
             - '@cache'
             - '@dbal.conn'
             - '@ganstaz.legend.helper'
-            - '%ganstaz.web.tables.legend%'
-            - '%ganstaz.web.tables.achievements%'
-            - '%ganstaz.web.tables.achievements_user%'
+            - '@ganstaz.legend.collection'
+            - '%core.table_prefix%'
+
+    ganstaz.legend.achievements.base:
+        abstract: true
 
 # Achievement types
-    ganstaz.legend.posts:
-        class: ganstaz\legend\core\type\posts
+    ganstaz.legend.common:
+        class: ganstaz\legend\core\type\common
         shared: false
         parent: ganstaz.legend.achievements.base
-        calls:
-            - [set_name, ['posts']]
         tags:
             - { name: gzo.web.legend }
 
-    ganstaz.legend.topics:
-        class: ganstaz\legend\core\type\topics
-        shared: false
-        parent: ganstaz.legend.achievements.base
-        calls:
-            - [set_name, ['topics']]
-        tags:
-            - { name: gzo.web.legend }
-
-    ganstaz.legend.anniversary:
-        class: ganstaz\legend\core\type\anniversary
-        shared: false
-        parent: ganstaz.legend.achievements.base
-        calls:
-            - [set_name, ['anniversary']]
-        tags:
-            - { name: gzo.web.legend }
-
-    ganstaz.legend.special:
-        class: ganstaz\legend\core\type\special
-        shared: false
-        parent: ganstaz.legend.achievements.base
-        calls:
-            - [set_name, ['special']]
-        tags:
-            - { name: gzo.web.legend }
+    # ganstaz.legend.special:
+    #     class: ganstaz\legend\core\type\special
+    #     shared: false
+    #     parent: ganstaz.legend.achievements.base
+    #     tags:
+    #         - { name: gzo.web.legend }
