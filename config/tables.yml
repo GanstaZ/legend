@@ -1,4 +1,4 @@
 parameters:
-    ganstaz.web.tables.legend: '%core.table_prefix%gzo_achievements'
-    ganstaz.web.tables.achievements: '%core.table_prefix%gzo_achievement_types'
-    ganstaz.web.tables.achievements_user: '%core.table_prefix%gzo_achievements_user'
+    ganstaz.gzo.tables.legend: '%core.table_prefix%gzo_achievements'
+    ganstaz.gzo.tables.achievements: '%core.table_prefix%gzo_achievement_types'
+    ganstaz.gzo.tables.achievements_user: '%core.table_prefix%gzo_achievements_user'

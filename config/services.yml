@@ -7,35 +7,37 @@ services:
         class: ganstaz\legend\core\helper
         arguments:
             - '@dbal.conn'
+            - '@template'
             - '%core.table_prefix%'
 
-    ganstaz.web.tab.legend:
+    ganstaz.gzo.tab.legend:
         class: ganstaz\legend\core\tabs\type\achievements
         shared: false
-        parent: ganstaz.web.tab.base
+        parent: ganstaz.gzo.tab.base
         arguments:
             - '@config'
             - '@ganstaz.legend.helper'
         calls:
             - [set_name, [achievements]]
         tags:
-            - { name: gzo.web.tab, order: 2 }
+            - { name: gzo.tab.type, order: 2 }
+
 
     ganstaz.legend.listener:
         class: ganstaz\legend\event\listener
         arguments:
+            - '@controller.helper'
             - '@language'
+            - '@template'
             - '@ganstaz.legend.helper'
         tags:
             - { name: event.listener }
 
-    ganstaz.legend.achievements.controller:
+    ganstaz.legend.achievements_controller:
         class: ganstaz\legend\controller\achievements
         arguments:
-            - '@config'
-            - '@dbal.conn'
             - '@controller.helper'
             - '@language'
             - '@template'
-            - '%ganstaz.web.tables.legend%'
-            - '%ganstaz.web.tables.achievements%'
+            - '@user'
+            - '@ganstaz.legend.manager'

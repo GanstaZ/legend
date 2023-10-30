@@ -4,7 +4,7 @@ services:
         arguments:
             - '@service_container'
         tags:
-            - { name: service_collection, tag: gzo.web.legend }
+            - { name: service_collection, tag: gzo.legend.type }
 
     ganstaz.legend.manager:
         class: ganstaz\legend\core\manager
@@ -24,11 +24,11 @@ services:
         shared: false
         parent: ganstaz.legend.achievements.base
         tags:
-            - { name: gzo.web.legend }
+            - { name: gzo.legend.type }
 
     # ganstaz.legend.special:
     #     class: ganstaz\legend\core\type\special
     #     shared: false
     #     parent: ganstaz.legend.achievements.base
     #     tags:
-    #         - { name: gzo.web.legend }
+    #         - { name: gzo.legend.type }

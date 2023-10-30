@@ -1,10 +1,9 @@
 <?php
 /**
 *
-* GZO Web. An extension for the phpBB Forum Software package.
+* An extension for the phpBB Forum Software package.
 *
-* @copyright (c) 2022, GanstaZ, https://www.github.com/GanstaZ/
-* @license GNU General Public License, version 2 (GPL-2.0)
+* @copyright (c) GanstaZ, https://www.github.com/GanstaZ/
 *
 */
 
@@ -12,10 +11,10 @@ namespace ganstaz\legend\core\tabs\type;
 
 use phpbb\config\config;
 use ganstaz\legend\core\helper;
-use ganstaz\web\core\tabs\type\base;
+use ganstaz\gzo\src\tabs\type\base;
 
 /**
-* GZO Web: Member legend tab
+* Member legend tab
 */
 class achievements extends base
 {
