@@ -1,5 +1,5 @@
 ## GZO Legend
-GZO Legend is an achievements extension for GZO Web.
+GZO Legend is an achievements extension for GZO (CMS).
 
 ## Installation
 Download/clone and move the repository into the folder phpbb_root/ext/ganstaz/legend
