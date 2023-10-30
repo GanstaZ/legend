@@ -8,7 +8,7 @@
 *
 */
 
-namespace ganstaz\zodiac;
+namespace ganstaz\legend;
 
 /**
 * GZO Web: Legend
