@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* GZO Web. An extension for the phpBB Forum Software package.
+* An extension for the phpBB Forum Software package.
 *
-* @copyright (c) 2022, GanstaZ, https://www.github.com/GanstaZ/
+* @copyright (c) GanstaZ, https://www.github.com/GanstaZ/
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */
@@ -11,12 +11,12 @@
 namespace ganstaz\legend;
 
 /**
-* GZO Web: Legend
+* Ext class
 */
 class ext extends \phpbb\extension\base
 {
 	/**
-	* Enable Legend if GZO Web is enabled
+	* Enable Legend if GZO is enabled
 	*
 	* @return bool
 	* @access public
@@ -27,7 +27,7 @@ class ext extends \phpbb\extension\base
 
 		$ext_manager = $this->container->get('ext.manager');
 
-		if (!$ext_manager->is_enabled('ganstaz/web'))
+		if (!$ext_manager->is_enabled('ganstaz/gzo'))
 		{
 			$this->container->get('language')->add_lang('require', 'ganstaz/legend');
 			$is_enableable = false;

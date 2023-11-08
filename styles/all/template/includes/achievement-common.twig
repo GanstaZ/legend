@@ -1,0 +1,28 @@
+{% from '@ganstaz_gzo/macros/tags.twig' import icon %}
+
+<div>
+
+	<div class="gzo-flex gzo-items-c">
+		<h3>{{ achievements.category|upper }}</h3>
+
+		{% if achievements.count > 1 %}
+			<span class="gzo-badge gzo-ml-2">{{ achievements.count }}</span>
+		{% endif %}
+	</div>
+
+</div>
+
+<div class="legend-history gzo-border-top gzo-mt-3 gzo-pt-3">
+
+	<h3 class="gzo-color-muted gzo-mb-2">Achievements</h3>
+
+	{% for item in achievements.item %}
+		<div class="gzo-ml-3 gzo-mb-3">
+
+			<div class="">{{ item.achievement }}</div>
+
+		</div>
+	{% endfor %}
+
+</div>
+

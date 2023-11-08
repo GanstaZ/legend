@@ -1,0 +1,38 @@
+{% from '@ganstaz_gzo/macros/tags.twig' import icon %}
+
+<div class="gzo-card gzo-mb-3 gzo-col-3">
+
+	<div class="gzo-flex gzo-flex-column gzo-legend-card gzo-items-c gzo-jc-center gzo-border gzo-pos-r gzo-p-3 gzo-btn modal-trigger" data-modal="modal-{{ loop.index }}">
+
+		<div class="gzo-legend-badge-card gzo-rounded"></div>
+
+		<div class="gzo-mt-2 gzo-mb-1">
+			<h3>{{ achievements.category|upper }}</h3>
+		</div>
+
+	</div>
+
+</div>
+
+<div class="modal" id="modal-{{ loop.index }}">
+
+	<div class="modal-sandbox"></div>
+
+	<div class="modal-box gzo-flex gzo-flex-column gzo-legend-card gzo-border gzo-pos-r">
+
+		<div class="gzo-flex gzo-items-c gzo-jc-center gzo-pos-r gzo-p-3">
+			<div class="gzo-legend-badge-card gzo-rounded"></div>
+
+			<div class="close-modal gzo-pos-a gzo-top gzo-right gzo-m-3 button">{{ icon('icon', 'times fa-fw', {'title': 'test'}) }}</div>
+
+		</div>
+
+		<div class="gzo-p-3">
+			{% set page = u_legend ? 'history' : 'common' %}
+
+			{{ include('@ganstaz_legend/includes/achievement-' ~ page ~ '.twig') }}
+		</div>
+
+	</div>
+
+</div>

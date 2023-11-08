@@ -1,0 +1,20 @@
+{% extends '@ganstaz_gzo/layout/app-base.twig' %}
+
+{% block mid_content %}
+
+	<h2 class="achievements-title">{{ PAGE_TITLE }}</h2>
+
+	{% if achievements %}
+
+		<div class="gzo-flex gzo-container-fluid gzo-flex-wrap">
+
+			{% for achievements in loops.achievements %}
+
+				{{ include('@ganstaz_legend/includes/achievement-item.twig') }}
+
+			{% endfor %}
+
+		</div>
+	{% endif %}
+
+{% endblock %}
