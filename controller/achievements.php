@@ -40,18 +40,18 @@ class achievements
 	* Constructor
 	*
 	* @param controller $controller Controller helper object
-	* @param language   $language   Language object
-	* @param template   $template   Template object
-	* @param user       $user       User object
-	* @param manager    $manager    Achievements object
+	* @param language	$language	Language object
+	* @param template	$template	Template object
+	* @param user		$user		User object
+	* @param manager	$manager	Achievements object
 	*/
 	public function __construct(controller $controller,	language $language,	template $template,	user $user,	manager $manager)
 	{
 		$this->controller = $controller;
-		$this->language   = $language;
-		$this->template   = $template;
-		$this->user       = $user;
-		$this->manager    = $manager;
+		$this->language	  = $language;
+		$this->template	  = $template;
+		$this->user		  = $user;
+		$this->manager	  = $manager;
 	}
 
 	/**
@@ -72,7 +72,7 @@ class achievements
 			{
 				$achievement = $this->manager->get($type);
 				$data = array_slice($achievement, 0, 3);
-				$data['user']   = $this->user->data[$data['user']];
+				$data['user']	= $this->user->data[$data['user']];
 				$data['points'] = $this->user->data[$data['points']] ?? 0;
 
 				if ($data['type'] === 'membership')
@@ -88,17 +88,17 @@ class achievements
 
 				//var_dump($data);
 				// Set categories
-			    $this->template->assign_block_vars('achievements', [
-				    'category' => $data['type'],
-				    'count'    => count($achievement_data),
-			    ]);
+				$this->template->assign_block_vars('achievements', [
+					'category' => $data['type'],
+					'count'	   => count($achievement_data),
+				]);
 
 				//var_dump(count($achievement_data));
-			    // Add data to given category
-			    foreach ($achievement_data as $item)
-			    {
-				    $this->template->assign_block_vars('achievements.item', $item);
-			    }
+				// Add data to given category
+				foreach ($achievement_data as $item)
+				{
+					$this->template->assign_block_vars('achievements.item', $item);
+				}
 			}
 		}
 
