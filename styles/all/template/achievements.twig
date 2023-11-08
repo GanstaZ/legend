@@ -1,0 +1,23 @@
+{% extends '@ganstaz_gzo/layout/profile-base.twig' %}
+
+{% block mid_content %}
+
+	<h2 class="memberlist-title">{{ PAGE_TITLE }}</h2>
+
+	{% if achievements %}
+
+		<div class="gzo-flex gzo-container-fluid gzo-flex-wrap">
+
+			{% set user_achievements = true %}
+			{% for achievements in loops.achievements %}
+
+				{{ include('@ganstaz_legend/includes/achievement-item.twig', {u_legend: user_achievements}) }}
+
+			{% endfor %}
+
+		</div>
+	{% else %}
+		No achievements
+	{% endif %}
+
+{% endblock %}

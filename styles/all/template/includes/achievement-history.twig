@@ -1,0 +1,36 @@
+{% from '@ganstaz_gzo/macros/tags.twig' import icon %}
+
+<div>
+	<span class="gzo-pos-a gzo-right gzo-m-3">{{ icon('icon', 'share-alt fa-fw', {'title': 'test'}) }}</span>
+
+	<div class="gzo-flex gzo-items-c">
+		<h3>{{ achievements.category|upper }}</h3>
+
+		{% if achievements.count > 1 %}
+			<span class="gzo-badge gzo-ml-2">{{ achievements.count }}</span>
+		{% endif %}
+	</div>
+
+	<div class="gzo-mt-1">@GanstaZ Category Description</div>
+
+</div>
+
+<div class="legend-history gzo-border-top gzo-mt-3 gzo-pt-3">
+
+	<h3 class="gzo-color-muted gzo-mb-2">History</h3>
+
+	<div class="gzo-t-item gzo-t-item--condensed legend-history-unlocked-at">
+		<div class="gzo-t-item-badge">{{ icon('icon', 'trophy icon-trophy', {'title': 'test'}) }}</div>
+		<div class="gzo-t-item-body"><span>Unlocked</span> · @time</div>
+	</div>
+
+	{% for item in achievements.item %}
+		<div class="gzo-t-item gzo-t-item--condensed legend-history-tier">
+
+			<div class="gzo-t-item-badge">{{ icon('icon', 'circle fa-fw', {'title': 'test'}) }}</div>
+			<div class="gzo-t-item-body">{{ item.name }}</div>
+
+		</div>
+	{% endfor %}
+
+</div>
