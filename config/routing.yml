@@ -1,0 +1,3 @@
+ganstaz_legend_achievements:
+    path: /achievements
+    defaults: { _controller: ganstaz.legend.achievements_controller:handle }
